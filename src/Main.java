@@ -17,5 +17,6 @@ public class Main {
         StreamEstudo.juntarValores(numeros);
         StreamEstudo.somaDosQuadrados(numeros);
         StreamEstudo.produtoLista(numeros);
+        StreamEstudo.filtarIntervalo(numeros,2,7);
     }
 }

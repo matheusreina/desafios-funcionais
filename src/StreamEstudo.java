@@ -94,4 +94,12 @@ public class StreamEstudo {
         System.out.println("Desafio 12: "+ temp);
     }
 
+    //Desafio 13 - Filtrar os números que estão dentro de um intervalo:
+    static void filtarIntervalo(List<Integer> listaNumerica, long inicio, long fim) {
+        List<Integer> intervalo = listaNumerica.stream().sorted().filter(num -> num > inicio && num < fim).toList();
+
+
+        System.out.println("Desafio 13: "+ intervalo);
+    }
+
 }
