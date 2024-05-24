@@ -1,6 +1,4 @@
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class StreamEstudo {
 
@@ -55,7 +53,7 @@ public class StreamEstudo {
     static void somaDigitos(List<Integer> listaNumerica) {
         List<String> temp = listaNumerica.stream().map(Object::toString).toList();
         List<String> numString = List.of(temp.stream().reduce((s1, s2) -> s1 + s2).orElse("").split(""));
-        int sum = numString.stream().map(Integer::valueOf).reduce(0, Integer::sum);
+        int sum = numString.stream().filter(s -> !Objects.equals(s, "-")).map(Integer::valueOf).reduce(0, Integer::sum);
 
         System.out.println("Desafio 8: " + sum);
     }
@@ -89,7 +87,7 @@ public class StreamEstudo {
 
     //Desafio 12 - Encontre o produto de todos os números da lista:
     static void produtoLista(List<Integer> listaNumerica) {
-        int temp = listaNumerica.stream().reduce(0, (num1, num2) -> num1 * num2);
+        int temp = listaNumerica.stream().reduce(1, (num1, num2) -> num1 * num2);
 
         System.out.println("Desafio 12: "+ temp);
     }
@@ -100,6 +98,106 @@ public class StreamEstudo {
 
 
         System.out.println("Desafio 13: "+ intervalo);
+    }
+
+    //Desafio 14 - Encontre o maior número primo da lista:
+    static void maiorPrimo(List<Integer> listaNumerica) {
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        int numDivisores = 0;
+
+        for (Integer num : listaNumerica) {
+            for (int i = 1; i <= num; i++) {
+                if (num % i == 0) {
+                    numDivisores++;
+                }
+            }
+
+            if (numDivisores == 2) {
+                temp.add(num);
+            }
+
+            numDivisores = 0;
+        }
+
+
+        List<Integer> listaPrimo = temp.stream().distinct().toList();
+        Optional<Integer> result = listaPrimo.stream().max(Comparator.naturalOrder());
+
+        System.out.println("Desafio 14: " + result.orElse(0));
+    }
+
+    //Desafio 15 - Verifique se a lista contém pelo menos um número negativo:
+    static void verificarNegativo(List<Integer> listaNumerica) {
+        boolean temp = listaNumerica.stream().anyMatch(num -> num < 0);
+
+        String result = "Desafio 15: ";
+
+        if (temp) {
+            result += "Existe um numero negativo na lista!";
+        } else {
+            result += "Não existe um numero negativo na lista!";
+        }
+
+        System.out.println(result);
+    }
+
+    //Desafio 16 - Agrupe os números em pares e ímpares:
+    static void segregacaoImparPar(List<Integer> listaNumerica) {
+        List<Integer> listaPar = listaNumerica.stream().filter(num -> num % 2 == 0).toList();
+        List<Integer> listaImpar = listaNumerica.stream().filter(num -> num % 2 != 0).toList();
+
+        System.out.println("Desafio 16 Par: "+ listaPar);
+        System.out.println("Desafio 16 Impar: "+ listaImpar);
+    }
+
+    //Desafio 17 - Filtrar os números primos da lista:
+    static void primos(List<Integer> listaNumerica) {
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        int numDivisores = 0;
+
+        for (Integer num : listaNumerica) {
+            for (int i = 1; i <= num; i++) {
+                if (num % i == 0) {
+                    numDivisores++;
+                }
+            }
+
+            if (numDivisores == 2) {
+                temp.add(num);
+            }
+
+            numDivisores = 0;
+        }
+
+        List<Integer> listaPrimo = temp.stream().distinct().toList();
+
+        System.out.println("Desafio 17: "+ listaPrimo);
+    }
+
+    //Desafio 18 - Verifique se todos os números da lista são iguais:
+    static void igual(List<Integer> listaNumerica) {
+        int temp = listaNumerica.stream().distinct().toList().size();
+
+        String result = "Desafio 18: ";
+
+        if (temp == 1) {
+            result += "Todos os elementos da lista são iguais!";
+        } else {
+            result += "Existem pelo menos dois elementos diferentes na lista!";
+        }
+
+        System.out.println(result);
+    }
+
+    //Desafio 19 - Encontre a soma dos números divisíveis por 3 e 5:
+    static void somaDivisiveisDe3e5(List<Integer> listaNumerica) {
+         Optional<Integer> temp = listaNumerica.stream()
+                 .filter(num -> (num % 3 == 0) || (num % 5 == 0))
+                 .reduce(Integer::sum);
+
+        System.out.println("Desafio 19: "+ temp.orElse(0));
     }
 
 }

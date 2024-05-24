@@ -18,5 +18,12 @@ public class Main {
         StreamEstudo.somaDosQuadrados(numeros);
         StreamEstudo.produtoLista(numeros);
         StreamEstudo.filtarIntervalo(numeros,2,7);
+        StreamEstudo.maiorPrimo(numeros);
+        StreamEstudo.verificarNegativo(numeros);
+        StreamEstudo.segregacaoImparPar(numeros);
+        StreamEstudo.primos(numeros);
+        StreamEstudo.igual(numeros);
+        StreamEstudo.somaDivisiveisDe3e5(numeros);
+
     }
 }
